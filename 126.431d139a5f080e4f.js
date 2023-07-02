@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkconstruction_app=self.webpackChunkconstruction_app||[]).push([[126],{7126:(c,n,u)=>{u.r(n),u.d(n,{DashboardRoutingModule:()=>s});var t=u(8996),a=u(4650);const r=[];let s=(()=>{class o{}return o.\u0275fac=function(l){return new(l||o)},o.\u0275mod=a.oAB({type:o}),o.\u0275inj=a.cJS({imports:[t.Bz.forChild(r),t.Bz]}),o})()}}]);
