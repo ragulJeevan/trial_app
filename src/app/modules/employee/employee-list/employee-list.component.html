@@ -1,0 +1,26 @@
+<div class="container my-3">
+    <div class="row my-2">
+        <div class="col-md-4 my-2" *ngFor = "let dep of departmentList">
+            <div class="card" style="width:18rem" >
+                <div class="card-body">
+                    <div class="card-title text-center bg-secondary display-6"><b>{{dep.department_name}}</b> </div>
+                    <hr>
+                    <div class="card-text">
+                        <p> 
+                          <span>No Of Sub Department :</span> <span>{{dep.sub_department_count}}</span>
+                        </p>
+                      <p> 
+                        <span>No Of Employee :</span> <span>{{dep.employee_count}}</span>
+                      </p>
+                      <p> 
+                        <span>Is Active :</span> <span>{{dep.department_life ? 'Active' : 'In-Active'}}</span>
+                      </p>
+                    </div>
+                    <div class="card-footer d-grid">
+                        <button class="btn btn-dark btn-block" (click)="routeAction()" >{{action}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
