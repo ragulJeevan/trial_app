@@ -65,7 +65,13 @@ export class UserListComponent implements OnInit {
         this.userList = res.data;
       }
 
-    })
+    }, ((err: any) => {
+      console.log(err.error);
+      if (err && err.error) {
+        this.toastr.error(err.error.errorMessage);
+      }
+
+    }))
 
 
   }

@@ -72,7 +72,7 @@
                                 <span *ngIf="!list.is_Active">In-Active</span>
                             </td>
                             <td>
-                                <button matTooltip="copy" class="btn btn-primary btn-sm top "
+                                <button matTooltip="Edit" class="btn btn-primary btn-sm top "
                                     (click)="openUserModal(add,'Edit',list)">
                                     Edit
                                 </button>
@@ -183,7 +183,7 @@
         </div>
         <div class="modal-footer">
             <button *ngIf="validateUser == 'add'" class="btn btn-primary" (click)="addUser()">Add</button>
-            <button *ngIf="validateUser == 'Edit'" class="btn btn-primary" (click)="updateUser()">Edit</button>
+            <button *ngIf="validateUser == 'Edit'" class="btn btn-primary" (click)="updateUser()">Update</button>
             <button class="btn btn-outline-secondary" (click)="close()">Close</button>
         </div>
     </div>
