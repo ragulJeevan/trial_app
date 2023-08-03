@@ -1,0 +1,64 @@
+.top {
+    top: -3px
+}
+
+.txt-b {
+    color: #383899;
+    font-size: 25px
+}
+
+.scroll {
+    height: 59vh !important;
+    overflow-y: auto;
+}
+
+#tags-table thead tr {
+    position: sticky;
+    top: 1px;
+    background: #6d6c6c !important;
+    z-index: 1;
+    border-width: 1px;
+    box-shadow: 0px 0px 0px 1px #c3c3c3;
+}
+
+.scroll-material {
+    height: 25vh !important;
+    overflow-y: auto;
+}
+
+.search-box {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.close {
+    cursor: pointer;
+    display: initial;
+    background-color: #2b2b7d;
+    color: white;
+    padding: 7px 13px;
+    border-radius: 4px;
+}
+
+.clear-field {
+    position: relative;
+    right: 22px;
+    top: -8px;
+    cursor: pointer;
+}
+
+.bolded {
+    font-weight: bold;
+    color: #383899;
+    font-size: 29px;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.required:after {
+    content: "*";
+    color: red;
+}

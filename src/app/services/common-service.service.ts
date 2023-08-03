@@ -20,6 +20,23 @@ export class CommonServiceService {
   setLoggIn(data: any) { if (data) { this._logged$.next(data); } }
   get getLoggIN() { return this._logged$.asObservable(); }
 
+  getData(url: string) {
+    return this.http.get(`${base_url}/${url}`);
+  }
+
+  postData(url: string, payLoad: any) {
+    return this.http.post(`${base_url}/${url}`, payLoad);
+  }
+
+  putData(url: string, payLoad: any) {
+    return this.http.put(`${base_url}/${url}`, payLoad);
+  }
+
+  deleteData(url: string) {
+    return this.http.delete(`${base_url}/${url}`);
+  }
+
+
   logIn(url: string, payLoad: any) {
     return this.http.post(`${base_url}/${url}`, payLoad);
   }

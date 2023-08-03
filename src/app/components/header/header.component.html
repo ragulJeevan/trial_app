@@ -2,55 +2,69 @@
     <a href="#" class="navbar-brand">
         <h1 class="badge bg-dark text-light display-1"><b>Construction App</b></h1>
     </a>
-       <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navlist">
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navlist">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse mat-display-headline" id="navlist">
         <ul class="navbar-nav me-auto ">
+            <!-- DASHBOARD  -->
             <li class="nav-item">
-                <a class="nav-link hover" routerLink="/home">DASHBOARD</a>
+                <a class="nav-link hover" (click)="gotoLink('')">DASHBOARD</a>
             </li>
+
+            <!-- REPORTS  -->
+            <li class="nav-item">
+                <a class="nav-link hover" (click)="gotoLink('')"> REPORT</a>
+            </li>
+
+            <!-- SETUP  -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle hover" data-bs-toggle="dropdown"> SET UP</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item hover" (click)="gotoLink('/setup/create')">Create</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item hover" (click)="gotoLink('')">Map</a></li>
+                </ul>
+            </li>
+            <!-- DEPARTMENT  -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle hover" data-bs-toggle="dropdown"> DEPARTMENT</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item hover" routerLink="/list-department">Deprtment List</a></li>
+                    <li><a class="dropdown-item hover" (click)="gotoLink('/list-department')">Deprtment List</a></li>
                     <!-- <li>
                         <hr class="dropdown-divider">
                     </li> -->
-                    <!-- <li><a class="dropdown-item hover" routerLink="/admin">Add Department</a></li> -->
+                    <!-- <li><a class="dropdown-item hover" (click)="gotoLink('')" routerLink="/admin">Add Department</a></li> -->
                 </ul>
             </li>
+            <!-- EMPLOYEE  -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle hover" data-bs-toggle="dropdown"> EMPLOYEE</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item hover" routerLink="/list-employee">Employee List</a></li>
-                    <!-- <li>
+                    <li><a class="dropdown-item hover" (click)="gotoLink('/list-employee')">Employee List</a></li>
+                    <li>
                         <hr class="dropdown-divider">
-                    </li> -->
-                    <!-- <li><a class="dropdown-item hover" routerLink="/admin">Add Employee</a></li> -->
+                    </li>
+                    <li><a class="dropdown-item hover" (click)="gotoLink('/users')">User List</a></li>
+                    <!-- <li><a class="dropdown-item hover" (click)="gotoLink('')" routerLink="/admin">Add Employee</a></li> -->
                 </ul>
             </li>
+            <!-- SITES  -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle hover" data-bs-toggle="dropdown">SITES</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item hover" routerLink="list-site">Site List</a></li>
+                    <li><a class="dropdown-item hover" (click)="gotoLink('list-site')">Site List</a></li>
                     <!-- <li class="dropdown-divider"></li> -->
                     <!-- <li><a class="dropdown-item hover" routerLink="wishlist">Add Site</a></li> -->
                 </ul>
             </li>
+            <!-- INVENTORY  -->
             <li class="nav-item">
-                <a class="nav-link hover"> REPORT</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link hover"> ATTETDANCE </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link hover"> EXPENSE </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link hover"> INVENTORY </a>
+                <a class="nav-link hover" (click)="gotoLink('')"> INVENTORY </a>
             </li>
         </ul>
     </div>
-    
+
 </nav>

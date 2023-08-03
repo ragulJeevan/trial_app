@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -7,12 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private toastr: ToastrService,
+  ) { }
 
   ngOnInit(): void {
   }
-  logout(){
-    
+  logout() {
+
+  }
+  gotoLink(link: string) {
+    if (link == '') {
+      this.toastr.warning('Development In Process');
+      return;
+    }
+    this.router.navigate([link]);
   }
 
 }

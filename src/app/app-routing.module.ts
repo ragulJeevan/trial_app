@@ -16,11 +16,14 @@ const dashboardMOdule = () => import('src/app/modules/dashboard/dashboard-routin
 const attendanceMOdule = () => import('src/app/modules/attendance/attendance-routing.module').then(x => x.AttendanceRoutingModule);
 // REPORT 
 const report = () => import('src/app/modules/reports/reports-routing.module').then(x => x.ReportsRoutingModule);
+// SETUP 
+const setup = () => import('src/app/modules/setting/setting-routing.module').then(x => x.SettingRoutingModule);
+
 
 
 const routes: Routes = [
-  { path: '', component:LoginComponent,canActivate : [AuthenticationGuard] },
-  { path: 'login', component:LoginComponent },
+  { path: '', component: LoginComponent, canActivate: [AuthenticationGuard] },
+  { path: 'login', component: LoginComponent },
   //Department module
   { path: 'depart', loadChildren: departmentMOdule, },
   //Employee module
@@ -32,7 +35,9 @@ const routes: Routes = [
   //Attendance module
   { path: 'attendance', loadChildren: attendanceMOdule, },
   // REPORTS 
-  {path:'reports',loadChildren:report},
+  { path: 'reports', loadChildren: report },
+  // SETUP 
+  { path: 'setup', loadChildren: setup }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
