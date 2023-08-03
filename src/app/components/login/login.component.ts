@@ -13,48 +13,52 @@ import { environment } from "src/environments/environment";
 export class LoginComponent implements OnInit {
 
   public loginForm!: FormGroup;
-  public isLoggedIn : boolean = false;
+  public isLoggedIn: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private toastr : ToastrService,
-    private router : Router,
-    private commonService : CommonServiceService,
-    ) { }
+    private toastr: ToastrService,
+    private router: Router,
+    private commonService: CommonServiceService,
+  ) { }
 
   ngOnInit(): void {
-
-    // this.loginForm = this.formBuilder.group({
-    //   username: ['', Validators.required],
-    //   password: ['', Validators.required]
-    // });
     this.loginForm = new FormGroup({
-      user_name : new FormControl('',Validators.required),
-      pass_code : new FormControl ('',Validators.required)
+      user_name: new FormControl('', Validators.required),
+      pass_code: new FormControl('', Validators.required)
     })
   }
 
 
   submitForm() {
+    let url = 'users/login';
     let userDetails = this.loginForm.value;
-   if(!this.isLoggedIn && this.loginForm.invalid){
-    this.toastr.error('Enter Required Fields');
-    return;
-   };
-   if(
-    // this.loginForm.controls['user_name'].value == '8248399209' || this.loginForm.controls['user_name'].value == '9159876526'|| this.loginForm.controls['passCode'].value == 'ragul' || this.loginForm.controls['passCode'].value == 'ragul'
-    environment.passCode.includes(userDetails.pass_code) && environment.userName.includes(userDetails.user_name)
-   ){
-    localStorage.setItem('login',JSON.stringify(this.loginForm.value));
-    localStorage.setItem('logged','loggedIn');
-    console.log(this.loginForm.value);
-    this.loginForm.reset();
-    this.commonService.setLoggIn(true);
-    this.router.navigate(['attendance/mark-attendance']); 
-   }else{
-    this.toastr.error('Username and Password not found');
-   }
-   
+    if (!this.isLoggedIn && this.loginForm.invalid) {
+      this.toastr.error('Enter Required Fields');
+      return;
+    };
+    let payLoad = {
+      user_name: userDetails.user_name,
+      password: userDetails.pass_code
+    }
+    this.commonService.logIn(url, payLoad).subscribe((res: any) => {
+      if (res.data) {
+        localStorage.setItem('userDetails', JSON.stringify(res.data[0]));
+        localStorage.setItem('logged', 'loggedIn');
+        this.commonService.setLoggIn(true);
+        this.router.navigate(['attendance/mark-attendance']);
+      }
+    },
+      ((err: any) => {
+        console.log(err);
+        if (err && err.error) {
+          this.toastr.error(err.error.errorMessage);
+        }
+
+      }))
+
   }
+
+
 
 }

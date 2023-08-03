@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  userName : ['8248399209','9159876526'],
-  passCode : ['ragul','nawin'],
+  base_url: "http://localhost:3000",
 };
 
 /*
