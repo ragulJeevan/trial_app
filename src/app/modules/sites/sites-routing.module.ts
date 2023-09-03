@@ -5,8 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { SiteListComponent } from './site-list/site-list.component';
 
 const routes: Routes = [
-  { path: 'site-list', component: SiteListComponent },
-  {path:'list-site',component:ListSiteComponent},
+  { path: 'site-list', component: SiteListComponent, },
+  { path: 'list-site', component: ListSiteComponent },
 ];
 
 @NgModule({

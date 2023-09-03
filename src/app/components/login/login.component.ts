@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommonServiceService } from 'src/app/services/common-service.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { environment } from "src/environments/environment";
 
 @Component({
@@ -14,12 +15,14 @@ export class LoginComponent implements OnInit {
 
   public loginForm!: FormGroup;
   public isLoggedIn: boolean = false;
+  public loggedInUser: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private router: Router,
     private commonService: CommonServiceService,
+    private storageService: LocalstorageService
   ) { }
 
   ngOnInit(): void {
@@ -43,10 +46,16 @@ export class LoginComponent implements OnInit {
     }
     this.commonService.logIn(url, payLoad).subscribe((res: any) => {
       if (res.data) {
-        localStorage.setItem('userDetails', JSON.stringify(res.data[0]));
-        localStorage.setItem('logged', 'loggedIn');
+        this.loggedInUser = res.data ? res.data : [];
+        if (this.loggedInUser && this.loggedInUser.length > 0) {
+          this.storageService.postData('usD', this.loggedInUser[0]);
+          if (this.loggedInUser[0].role_id == '64f4a0a207c44fa32886c541') {
+            this.router.navigate(['sites/list-site']);
+          } else {
+            this.router.navigate(['attendance/mark-attendance']);
+          }
+        }
         this.commonService.setLoggIn(true);
-        this.router.navigate(['attendance/mark-attendance']);
       }
     },
       ((err: any) => {

@@ -11,21 +11,15 @@
             <li class="nav-item">
                 <a class="nav-link hover" (click)="gotoLink('')">DASHBOARD</a>
             </li>
-
-            <!-- REPORTS  -->
-            <li class="nav-item">
-                <a class="nav-link hover" (click)="gotoLink('')"> REPORT</a>
-            </li>
-
             <!-- SETUP  -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle hover" data-bs-toggle="dropdown"> SET UP</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item hover" (click)="gotoLink('/setup/create')">Create</a></li>
+                    <li><a class="dropdown-item hover" (click)="gotoLink('/setup/create')">Shift</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item hover" (click)="gotoLink('')">Map</a></li>
+                    <li><a class="dropdown-item hover" (click)="gotoLink('')">Role</a></li>
                 </ul>
             </li>
             <!-- DEPARTMENT  -->
@@ -60,11 +54,19 @@
                     <!-- <li><a class="dropdown-item hover" routerLink="wishlist">Add Site</a></li> -->
                 </ul>
             </li>
-            <!-- INVENTORY  -->
+            <!-- REPORTS  -->
             <li class="nav-item">
-                <a class="nav-link hover" (click)="gotoLink('')"> INVENTORY </a>
+                <a class="nav-link hover" (click)="gotoLink('')"> REPORT</a>
             </li>
+            <!-- INVENTORY  -->
+            <!-- <li class="nav-item">
+                <a class="nav-link hover" (click)="gotoLink('')"> INVENTORY </a>
+            </li> -->
         </ul>
+    </div>
+    <!-- Logout button -->
+    <div *ngIf="this.loggedIn" class="ml-auto">
+        <button class="btn btn-primary" (click)="logout()">Logout</button>
     </div>
 
 </nav>
