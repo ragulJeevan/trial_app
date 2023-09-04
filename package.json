@@ -25,6 +25,7 @@
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.3",
     "jquery": "^3.6.4",
+    "moment": "^2.29.4",
     "ngb-modal": "^2.0.3",
     "ngx-pagination": "^6.0.3",
     "ngx-toastr": "^15.2.2",

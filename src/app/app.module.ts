@@ -23,6 +23,7 @@ import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import { AttendanceModule } from './modules/attendance/attendance.module';
+import { SettingModule } from './modules/setting/setting.module';
 
 @NgModule({
   declarations: [
@@ -52,11 +53,12 @@ import { AttendanceModule } from './modules/attendance/attendance.module';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    AttendanceModule
+    AttendanceModule,
+    SettingModule
     // NgbModal
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AppModule { }
