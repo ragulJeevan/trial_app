@@ -43,6 +43,7 @@ export class RoleComponent implements OnInit {
     this.commonService.getData(url).subscribe((res: any) => {
       if (res && res.data) {
         this.roleList = res.data ? res.data : [];
+        this.isAddRole = true;
       }
     }, ((err: any) => {
       console.log(err.error);

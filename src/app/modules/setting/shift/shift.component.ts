@@ -70,6 +70,7 @@ export class ShiftComponent implements OnInit {
     this.commonService.getData(url).subscribe((res: any) => {
       if (res && res.data) {
         this.shiftList = res.data ? res.data : [];
+        this.isAddShift = true;
       }
     }, ((err: any) => {
       console.log(err.error);
