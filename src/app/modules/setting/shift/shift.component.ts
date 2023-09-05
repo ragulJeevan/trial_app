@@ -19,6 +19,8 @@ export class ShiftComponent implements OnInit {
   public shiftList: any = [];
   public userDetails: any = [];
   public isAddShift: boolean = true;
+  public currentShift: any = {};
+
 
   constructor(
     private modalService: NgbModal,
@@ -47,7 +49,8 @@ export class ShiftComponent implements OnInit {
         timeZone: 'IST',
         startTime: moment(data.start_time, 'hh:mm a').format('HH:mm'),
         endTime: moment(data.end_time, 'hh:mm a').format('HH:mm'),
-      })
+      });
+      this.currentShift = data;
     }
     this.modalService.open(modal, {
       size: 'md',
@@ -102,6 +105,37 @@ export class ShiftComponent implements OnInit {
       "created_at": currentDate
     }
     this.commonService.postData(url, payLoad).subscribe((res: any) => {
+      if (res) {
+        this.toastr.success(res.message);
+        this.getShiftList();
+        this.close();
+      }
+    }, ((err: any) => {
+      console.log(err.error);
+      if (err.error && err.error.errorMessage) {
+        this.toastr.error(err.error.errorMessage);
+      }
+
+    }))
+  }
+  // UPDATE SHIFT 
+  updateShift() {
+    let role = this.shiftForm.value;
+    let currentDate = moment(new Date()).format('DD MM YYYY hh:mm:ss');
+    if (this.shiftForm.invalid) {
+      this.toastr.error("Please Fill Mandatory Fields");
+      return;
+    };
+
+    let url = `shift/edit/${this.currentShift._id}`;
+    let payLoad = {
+      "role_name": role.roleName,
+      "is_Active": role.isActive,
+      "client_id": this.userDetails.client_id,
+      "updated_by": this.userDetails._id,
+      "updated_at": currentDate
+    }
+    this.commonService.putData(url, payLoad).subscribe((res: any) => {
       if (res) {
         this.toastr.success(res.message);
         this.getShiftList();
