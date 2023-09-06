@@ -123,24 +123,36 @@ export class ShiftComponent implements OnInit {
   }
   // UPDATE SHIFT 
   updateShift() {
-    let role = this.shiftForm.value;
+    let shift = this.shiftForm.value;
     let currentDate = moment(new Date()).format('DD MM YYYY hh:mm:ss');
     if (this.shiftForm.invalid) {
       this.toastr.error("Please Fill Mandatory Fields");
       return;
     };
-
+    let startTime = moment(shift.startTime, 'hh:mm:ss');
+    let endTime = moment(shift.endTime, 'hh:mm:ss');
+    let duration = moment.duration(endTime.diff(startTime));
+    if (startTime > endTime) {
+      let endTime1 = moment(endTime).add(1, 'day');
+      let startTime1 = moment(startTime);
+      duration = moment.duration(endTime1.diff(startTime1));
+    }
+    let hours = duration.hours();
     let url = `shift/edit/${this.currentShift._id}`;
     let payLoad = {
-      "role_name": role.roleName,
-      "is_Active": role.isActive,
+      "role_name": shift.shiftName,
+      "is_Active": shift.isActive,
       "client_id": this.userDetails.client_id,
+      "duration": hours,
+      "time_zone": "IST",
+      "start_time": moment(startTime).format('hh:mm a'),
+      "end_time": moment(endTime).format('hh:mm a'),
       "updated_by": this.userDetails._id,
       "updated_at": currentDate
     }
     this.commonService.putData(url, payLoad).subscribe((res: any) => {
       if (res) {
-        this.toastr.success(res.message);
+        this.toastr.success(res.statusMessage);
         this.getShiftList();
         this.close();
       }
