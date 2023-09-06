@@ -32,6 +32,7 @@
                             <th>TimeZone</th>
                             <th>Duration</th>
                             <th>Timing</th>
+                            <th>Created By</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -44,6 +45,7 @@
                             <td>IST</td>
                             <td>{{list.duration}}</td>
                             <td><span>{{list.start_time}}</span><span>-</span><span>{{list.end_time}}</span></td>
+                            <td>{{getUser(list.created_by)}}</td>
                             <td>
                                 <button matTooltip="copy" (click)="openShiftModal(add,'Edit',list)"
                                     class="btn btn-primary btn-sm top ">

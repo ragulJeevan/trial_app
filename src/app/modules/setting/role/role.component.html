@@ -41,7 +41,7 @@
                             <td> <span class="mx-3"> {{i+1}} </span> </td>
                             <td>{{list.role_name}}</td>
                             <td>{{list.is_Active ? 'Active' : 'In-Active'}}</td>
-                            <td>{{list.created_by}}</td>
+                            <td>{{getUser(list.created_by)}}</td>
                             <td>
                                 <button matTooltip="copy" (click)="openRoleModal(add,'Edit',list)"
                                     class="btn btn-primary btn-sm top ">

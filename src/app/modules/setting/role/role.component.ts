@@ -21,7 +21,8 @@ export class RoleComponent implements OnInit {
   public options = [
     { label: 'Active', value: true },
     { label: 'Inactive', value: false }
-  ]
+  ];
+  public userList: any = [];
 
   constructor(
     private modalService: NgbModal,
@@ -37,6 +38,7 @@ export class RoleComponent implements OnInit {
       isActive: new FormControl(false),
     });
     this.getRoleList();
+    this.getUserList();
   }
   getRoleList() {
     let url = "role/list";
@@ -132,7 +134,32 @@ export class RoleComponent implements OnInit {
       if (err.error && err.error.errorMessage) {
         this.toastr.error(err.error.errorMessage);
       }
-
     }))
+  }
+  // TO GET USER DETAILS 
+  getUserList() {
+    let url = 'users/list';
+    this.commonService.getData(url).subscribe((res: any) => {
+      if (res.data) {
+        this.userList = res?.data ? res?.data : [];
+      }
+    },
+      ((err: any) => {
+        console.log(err.error);
+        if (err && err.error) {
+          this.toastr.error(err.error.errorMessage);
+        }
+
+      }))
+  }
+  // TO GET MAPPED USER 
+  getUser(item: any) {
+    if (item && item != "") {
+      let user = this.userList.find((x: any) => x._id == item);
+      return user?.user_name ? user?.user_name : "";
+    } else {
+      return "";
+    }
+
   }
 }

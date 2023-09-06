@@ -20,6 +20,7 @@ export class ShiftComponent implements OnInit {
   public userDetails: any = [];
   public isAddShift: boolean = true;
   public currentShift: any = {};
+  public userList: any = [];
 
 
   constructor(
@@ -38,6 +39,7 @@ export class ShiftComponent implements OnInit {
       endTime: new FormControl(null, Validators.required)
     });
     this.getShiftList();
+    this.getUserList();
   }
 
   // TO OPEN SHIFT MODAL 
@@ -150,5 +152,30 @@ export class ShiftComponent implements OnInit {
 
     }))
   }
+  // TO GET USER DETAILS 
+  getUserList() {
+    let url = 'users/list';
+    this.commonService.getData(url).subscribe((res: any) => {
+      if (res.data) {
+        this.userList = res?.data ? res?.data : [];
+      }
+    },
+      ((err: any) => {
+        console.log(err.error);
+        if (err && err.error) {
+          this.toastr.error(err.error.errorMessage);
+        }
 
+      }))
+  }
+  // TO GET MAPPED USER 
+  getUser(item: any) {
+    if (item && item != "") {
+      let user = this.userList.find((x: any) => x._id == item);
+      return user?.user_name ? user?.user_name : "";
+    } else {
+      return "";
+    }
+
+  }
 }
