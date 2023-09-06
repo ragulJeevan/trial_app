@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { CommonServiceService } from 'src/app/services/common-service.service';
 import { DepartmentService } from 'src/app/services/department.service';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
   selector: 'app-list-employee',
@@ -23,32 +26,37 @@ export class ListEmployeeComponent implements OnInit {
   public saveVariable: boolean = true;
   public departmentList: any = [];
   public subDepartmentList: any = [];
-  public validateUser: string = '';
   public updatedData: any;
-  public currentUser: any;
   public roleList: any = [];
+  public userDetails: any = [];
+  public options = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
+  public isAdd: boolean = true;
+  public userList: any = [];
 
   constructor(
     private modalService: NgbModal,
     private toastr: ToastrService,
     private employeeService: EmployeeService,
     private departmentService: DepartmentService,
+    public storageService: LocalstorageService,
+    private commonService: CommonServiceService,
   ) { }
 
   ngOnInit(): void {
-
-    let data: any = localStorage.getItem('userDetails');
-    this.currentUser = JSON.parse(data);
+    this.userDetails = this.storageService.getData('usD');
     this.employeeForm = new FormGroup({
       emp_name: new FormControl('', Validators.required),
       dep_id: new FormControl('', Validators.required),
       role_id: new FormControl('', Validators.required),
       sub_dep_id: new FormControl(''),
+      isActive: new FormControl(false),
     });
-
-
     this.getRoleList();
     this.getDepartmentList();
+    this.getUserList();
     this.getEmployeeList(1);
   }
 
@@ -103,7 +111,6 @@ export class ListEmployeeComponent implements OnInit {
     }))
   }
   openEmployeeModal(modal: any, item: string, data: any) {
-    this.validateUser = item;
     this.updatedData = data;
     if (item == 'Edit') {
       this.employeeForm.patchValue({
@@ -111,7 +118,9 @@ export class ListEmployeeComponent implements OnInit {
         dep_id: data?.dep_id ? data?.dep_id : '',
         role_id: data?.role_id ? data?.role_id : '',
         sub_dep_id: data?.sub_dep_id ? data?.sub_dep_id : '',
+        isActive: data.is_Active
       });
+      this.isAdd = false;
     }
     this.modalService.open(modal, {
       size: 'md',
@@ -127,14 +136,18 @@ export class ListEmployeeComponent implements OnInit {
       return;
     }
     let dep = this.employeeForm.value;
-    let url = 'emp/add'
+    let url = 'emp/add';
+    let currentDate = moment(new Date()).format('DD MM YYYY hh:mm:ss');
     let payLoad = {
       "emp_name": dep.emp_name,
-      "client_id": this.currentUser.client_id,
-      "client_name": this.currentUser.client_name,
+      "client_id": this.userDetails.client_id,
+      "client_name": this.userDetails.client_name,
       "dep_id": dep.dep_id,
       "sub_dep_id": dep.sub_dep_id,
-      "role_id": dep.role_id
+      "role_id": dep.role_id,
+      "is_Active": dep.isActive,
+      "created_by": this.userDetails._id,
+      "created_at": currentDate
 
     }
     this.employeeService.postEmployee(url, payLoad).subscribe((res: any) => {
@@ -161,14 +174,18 @@ export class ListEmployeeComponent implements OnInit {
     let dep = this.employeeForm.value;
     let newData = this.updatedData;
     let url = `emp/edit/${newData._id}`;
+    let currentDate = moment(new Date()).format('DD MM YYYY hh:mm:ss');
 
     let payLoad = {
       "emp_name": dep.emp_name,
-      "client_id": this.currentUser.client_id,
-      "client_name": this.currentUser.client_name,
+      "client_id": this.userDetails.client_id,
+      "client_name": this.userDetails.client_name,
       "dep_id": dep.dep_id,
       "sub_dep_id": dep.sub_dep_id,
-      "role_id": dep.role_id
+      "role_id": dep.role_id,
+      "is_Active": dep.isActive,
+      "updated_by": this.userDetails._id,
+      "updated_at": currentDate
     };
 
 
@@ -251,5 +268,30 @@ export class ListEmployeeComponent implements OnInit {
     }
 
   }
+  // TO GET USER DETAILS 
+  getUserList() {
+    let url = 'users/list';
+    this.commonService.getData(url).subscribe((res: any) => {
+      if (res.data) {
+        this.userList = res?.data ? res?.data : [];
+      }
+    },
+      ((err: any) => {
+        console.log(err.error);
+        if (err && err.error) {
+          this.toastr.error(err.error.errorMessage);
+        }
 
+      }))
+  }
+  // TO GET MAPPED USER 
+  getUser(item: any) {
+    if (item && item != "") {
+      let user = this.userList.find((x: any) => x._id == item);
+      return user?.user_name ? user?.user_name : "";
+    } else {
+      return "";
+    }
+
+  }
 }

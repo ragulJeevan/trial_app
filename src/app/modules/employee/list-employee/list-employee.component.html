@@ -52,6 +52,7 @@
                             <th>Emplopyee Name</th>
                             <th>Depratment</th>
                             <th>Role</th>
+                            <th>Created By</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -61,20 +62,21 @@
                         <tr
                             *ngFor="let list of employeeList | paginate : { id: 'server', itemsPerPage: per_page, currentPage: page_no, totalItems: total };let i = index ">
 
-                            <td> <span class="mx-3"> {{i+ showing_from}} </span> </td>
+                            <td> <span class="mx-3"> {{i+ 1}} </span> </td>
                             <td>{{list.emp_name}}</td>
                             <td>{{getDep(list.dep_id)}}</td>
                             <td>{{getRole(list.role_id)}}</td>
+                            <td>{{getUser(list.created_by)}}</td>
                             <td>
                                 <span *ngIf="list.is_Active">Active</span>
                                 <span *ngIf="!list.is_Active">In-Active</span>
                             </td>
                             <td>
-                                <button matTooltip="Edit" class="btn btn-primary btn-sm top mx-2 "
+                                <button class="btn btn-primary btn-sm top mx-2 "
                                     (click)="openEmployeeModal(add,'Edit',list)">
                                     Edit
                                 </button>
-                                <button matTooltip="Edit" class="btn btn-secondary btn-sm top mx-2"
+                                <button class="btn btn-secondary btn-sm top mx-2"
                                     (click)="openDeleteModal(delete,list)">
                                     Delete
                                 </button>
@@ -92,7 +94,7 @@
             </div>
 
 
-            <table *ngIf="employeeList.length > 0" class="rpt-count pagination-view" width="100%"
+            <!-- <table *ngIf="employeeList.length > 0" class="rpt-count pagination-view" width="100%"
                 style="display: table;">
                 <tbody>
                     <tr>
@@ -108,7 +110,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </div>
     </div>
 </div>
@@ -154,6 +156,15 @@
                         </select>
 
                     </div>
+
+                    <!-- EMPLOYEE Status  -->
+                    <div class="form-group col-md-6 ">
+                        <label>Status</label>
+                        <select formControlName="isActive" class="form-control" name="status">
+                            <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+                        </select>
+                    </div>
+
                 </div>
 
 
@@ -163,8 +174,8 @@
 
         </div>
         <div class="modal-footer">
-            <button *ngIf="validateUser == 'add'" class="btn btn-primary" (click)="addEmployee()">Add</button>
-            <button *ngIf="validateUser == 'Edit'" class="btn btn-primary" (click)="updateEmployee()">Update</button>
+            <button *ngIf="isAdd" class="btn btn-primary" (click)="addEmployee()">Add</button>
+            <button *ngIf="!isAdd" class="btn btn-primary" (click)="updateEmployee()">Update</button>
             <button class="btn btn-outline-secondary" (click)="close()">Close</button>
         </div>
     </div>

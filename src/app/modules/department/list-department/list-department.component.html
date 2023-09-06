@@ -64,7 +64,7 @@
                             <td> <span class="mx-3"> {{i+ 1}} </span> </td>
                             <td>{{list.department_name}}</td>
                             <td></td>
-                            <td>{{list.created_by}}</td>
+                            <td>{{getUser(list.created_by)}}</td>
                             <td>{{list.is_Active ? 'Active' : 'In-Active'}}</td>
                             <td>
                                 <button (click)="openDepartmentModal(add,'edit',list)"
@@ -140,7 +140,7 @@
         </div>
         <div class="modal-footer">
             <button *ngIf="isAdd" class="btn btn-primary" (click)="addDepartment()">Add</button>
-            <button *ngIf="!isAdd" class="btn btn-primary" (click)="updateDepartment()">Add</button>
+            <button *ngIf="!isAdd" class="btn btn-primary" (click)="updateDepartment()">Update</button>
             <button class="btn btn-outline-secondary" (click)="close()">Close</button>
         </div>
     </div>

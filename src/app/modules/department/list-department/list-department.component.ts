@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { CommonServiceService } from 'src/app/services/common-service.service';
 import { DepartmentService } from 'src/app/services/department.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 
@@ -29,14 +30,16 @@ export class ListDepartmentComponent implements OnInit {
   public options = [
     { label: 'Active', value: true },
     { label: 'Inactive', value: false }
-  ]
+  ];
+  public userList: any = [];
 
 
   constructor(
     private modalService: NgbModal,
     private toastr: ToastrService,
     private storageService: LocalstorageService,
-    private departmentService: DepartmentService
+    private departmentService: DepartmentService,
+    private commonService: CommonServiceService,
   ) { }
 
   ngOnInit(): void {
@@ -45,7 +48,7 @@ export class ListDepartmentComponent implements OnInit {
       depName: new FormControl('', Validators.required),
       isActive: new FormControl('false')
     });
-
+    this.getUserList();
     this.getDepartmentList(1);
   }
   getDepartmentList(Page: any) {
@@ -146,6 +149,31 @@ export class ListDepartmentComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
+  // TO GET USER DETAILS 
+  getUserList() {
+    let url = 'users/list';
+    this.commonService.getData(url).subscribe((res: any) => {
+      if (res.data) {
+        this.userList = res?.data ? res?.data : [];
+      }
+    },
+      ((err: any) => {
+        console.log(err.error);
+        if (err && err.error) {
+          this.toastr.error(err.error.errorMessage);
+        }
 
+      }))
+  }
+  // TO GET MAPPED USER 
+  getUser(item: any) {
+    if (item && item != "") {
+      let user = this.userList.find((x: any) => x._id == item);
+      return user?.user_name ? user?.user_name : "";
+    } else {
+      return "";
+    }
+
+  }
 
 }

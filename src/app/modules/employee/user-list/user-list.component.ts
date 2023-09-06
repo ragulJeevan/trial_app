@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { CommonServiceService } from 'src/app/services/common-service.service';
 import { DepartmentService } from 'src/app/services/department.service';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 @Component({
   selector: 'app-user-list',
@@ -27,19 +30,19 @@ export class UserListComponent implements OnInit {
   public currentUser: any;
   public roleList: any = [];
   public validateUser: string = '';
-  public updatedData: any;
 
   constructor(
     private modalService: NgbModal,
     private toastr: ToastrService,
     private employeeService: EmployeeService,
     private departmentService: DepartmentService,
+    private storageService: LocalstorageService,
+    private commonService: CommonServiceService,
   ) { }
 
   ngOnInit(): void {
 
-    let data: any = localStorage.getItem('userDetails');
-    this.currentUser = JSON.parse(data);
+    this.currentUser = this.storageService.getData('usD');
 
     this.userForm = new FormGroup({
       user_name: new FormControl('', Validators.required),
@@ -83,7 +86,6 @@ export class UserListComponent implements OnInit {
   }
   openUserModal(modal: any, item: string, data: any) {
     this.validateUser = item;
-    this.updatedData = data;
     if (item === 'Edit') {
       this.userForm.patchValue({
         user_name: data?.user_name ? data?.user_name : '',
@@ -112,6 +114,7 @@ export class UserListComponent implements OnInit {
     }
     let url = 'users/add';
     let userData = this.userForm.value;
+    let currentDate = moment(new Date()).format('DD MM YYYY hh:mm:ss');
 
     let payLoad = {
       "user_name": userData.user_name,
@@ -121,7 +124,9 @@ export class UserListComponent implements OnInit {
       "client_id": this.currentUser.client_id,
       "client_name": this.currentUser.client_name,
       "dep_id": userData.dep_id,
-      "role_id": userData.role_id
+      "role_id": userData.role_id,
+      "created_by": this.currentUser._id,
+      "created_at": currentDate
     };
 
 
@@ -148,8 +153,9 @@ export class UserListComponent implements OnInit {
       return;
     }
     let userData = this.userForm.value;
-    let newData = this.updatedData;
-    let url = `users/edit/${newData._id}`;
+    let newData = userData;
+    let url = `users/edit/${this.currentUser._id}`;
+    let currentDate = moment(new Date()).format('DD MM YYYY hh:mm:ss');
 
     let payLoad = {
       "user_name": userData.user_name,
@@ -236,6 +242,16 @@ export class UserListComponent implements OnInit {
     if (item && item != "") {
       let role = this.roleList.find((x: any) => x._id == item);
       return role?.role_name ? role?.role_name : ""
+    } else {
+      return "";
+    }
+
+  }
+  // TO GET MAPPED USER 
+  getUser(item: any) {
+    if (item && item != "") {
+      let user = this.userList.find((x: any) => x._id == item);
+      return user?.user_name ? user?.user_name : "";
     } else {
       return "";
     }

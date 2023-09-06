@@ -53,6 +53,7 @@
                             <th>Last Name</th>
                             <th>Role</th>
                             <th>Depratment</th>
+                            <th>Created By</th>
                             <th>User Status</th>
                             <th>Action</th>
                         </tr>
@@ -67,6 +68,7 @@
                             <td>{{list.last_name }}</td>
                             <td>{{getRole(list.role_id)}}</td>
                             <td>{{getDep(list.dep_id)}}</td>
+                            <td>{{getUser(list.created_by)}}</td>
                             <td>
                                 <span *ngIf="list.is_Active">Active</span>
                                 <span *ngIf="!list.is_Active">In-Active</span>
