@@ -24,6 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^5.3.1",
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.3",
+    "dist": "^0.1.2",
     "jquery": "^3.6.4",
     "moment": "^2.29.4",
     "ngb-modal": "^2.0.3",
