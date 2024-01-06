@@ -16,6 +16,7 @@ import { LocalstorageService } from 'src/app/services/localstorage.service';
 export class ShiftComponent implements OnInit {
 
   public isAdmin : boolean = false;
+  public addButton : string = 'Add Shift'
 
   public shiftForm!: FormGroup;
   public shiftList: any = [];
@@ -33,6 +34,7 @@ export class ShiftComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.commonService.setHeader('Shift List');
     this.userDetails = this.storageService.getData('usD');
     this.shiftForm = new FormGroup({
       shiftName: new FormControl(null, Validators.required),
@@ -98,6 +100,10 @@ export class ShiftComponent implements OnInit {
     let duration = moment.duration(endTime.diff(startTime));
     let hours = duration.hours();
 
+    if( startTime > endTime ){
+      this.toastr.error("Start Time is greater than end time");
+      return;
+    }
     let url = "shift/add";
     let payLoad = {
       "shift_name": shift.shiftName,
@@ -135,14 +141,16 @@ export class ShiftComponent implements OnInit {
     let endTime = moment(shift.endTime, 'hh:mm:ss');
     let duration = moment.duration(endTime.diff(startTime));
     if (startTime > endTime) {
-      let endTime1 = moment(endTime).add(1, 'day');
-      let startTime1 = moment(startTime);
-      duration = moment.duration(endTime1.diff(startTime1));
+      // let endTime1 = moment(endTime).add(1, 'day');
+      // let startTime1 = moment(startTime);
+      // duration = moment.duration(endTime1.diff(startTime1));
+      this.toastr.error("Start Time is greater than end time");
+      return;
     }
     let hours = duration.hours();
     let url = `shift/edit/${this.currentShift._id}`;
     let payLoad = {
-      "role_name": shift.shiftName,
+      "shift_name": shift.shiftName,
       "is_Active": shift.isActive,
       "client_id": this.userDetails.client_id,
       "duration": hours,

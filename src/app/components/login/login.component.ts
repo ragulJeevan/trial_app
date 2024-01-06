@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.commonService.setHeader('Login');
     this.loginForm = new FormGroup({
       user_name: new FormControl('', Validators.required),
       pass_code: new FormControl('', Validators.required)

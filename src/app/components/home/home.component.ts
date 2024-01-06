@@ -18,8 +18,8 @@ export class HomeComponent {
       shareReplay()
     );
 
-    public title : string = 'Kantha Constrcutions';
-    public menu : string = 'MENU';
+    public title : string = 'Home';
+    public menu : string = 'Kantha Constrcutions';
     public isLoggedIn : boolean = false;
 
   constructor(
@@ -38,6 +38,11 @@ export class HomeComponent {
     }else{
       this.isLoggedIn = false;
     }
+    this.commonService.getHeader.subscribe((data:any)=>{
+      if(data && data != ''){
+        this.title = data;
+      }
+    })
   }
 
   logout(){

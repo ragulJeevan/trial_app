@@ -12,6 +12,7 @@ export class CommonServiceService {
 
   private _logged$ = new BehaviorSubject<boolean>(false);
   private _loader$ = new BehaviorSubject<boolean>(false);
+  private _header$ = new BehaviorSubject<string>('Home');
 
   constructor(
     private http: HttpClient
@@ -24,6 +25,10 @@ export class CommonServiceService {
   get getLoader() {
     return this._loader$.asObservable();
   }
+
+  //SET HEADER 
+  setHeader(data: any) { if (data) { this._header$.next(data); } }
+  get getHeader() { return this._header$.asObservable(); }
 
   // AFTER LOGGING IN 
   setLoggIn(data: any) { if (data) { this._logged$.next(data); } }

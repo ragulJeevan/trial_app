@@ -5,15 +5,15 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar style="color: whitesmoke;" >{{menu}}</mat-toolbar>
     <mat-nav-list>
-      <a   mat-list-item routerLink="">HOME</a>
-      <a   mat-list-item routerLink="/shift">SHIFT</a>
-      <a   mat-list-item routerLink="/role">ROLE</a>
-      <a  mat-list-item routerLink="/department-list" >DEPARTMENTS</a>
-      <a  mat-list-item routerLink="/employee-list" >EMPLOYEE LIST</a>
-      <a  mat-list-item routerLink="/list-site" >SITES</a>
-      <a  mat-list-item routerLink="attendance/mark-attendance" >MARK ATTENDANCE</a>
-      <a  mat-list-item routerLink="attendance/mark-attendance" >ADD INVENTORY</a>
-      <a  mat-list-item routerLink="attendance/mark-attendance" >ADD EXPENSE</a>
+      <a  (click)="drawer.toggle()"  mat-list-item routerLink="">HOME</a>
+      <a  (click)="drawer.toggle()"  mat-list-item routerLink="/shift">SHIFT</a>
+      <a  (click)="drawer.toggle()"  mat-list-item routerLink="/role">ROLE</a>
+      <a  (click)="drawer.toggle()" mat-list-item routerLink="/department-list" >DEPARTMENTS</a>
+      <a  (click)="drawer.toggle()" mat-list-item routerLink="/employee-list" >EMPLOYEE LIST</a>
+      <a  (click)="drawer.toggle()" mat-list-item routerLink="/list-site" >SITES</a>
+      <a  (click)="drawer.toggle()" mat-list-item routerLink="attendance/mark-attendance" >MARK ATTENDANCE</a>
+      <a  (click)="drawer.toggle()" mat-list-item routerLink="attendance/mark-attendance" >ADD INVENTORY</a>
+      <a  (click)="drawer.toggle()" mat-list-item routerLink="attendance/mark-attendance" >ADD EXPENSE</a>
       <!-- <a  mat-list-item routerLink="reports/attendance-report">ATTENDANCE REPORT</a> -->
       <a  mat-list-item (click)="logout()" >LOGOUT</a>
     </mat-nav-list>
@@ -34,11 +34,11 @@
         </div>
       
       </button>
-      <b><i>{{title}}</i></b>
+     <span style="padding: 2px;font-weight:bold" >{{title}}</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <!-- [ngClass]="{'center':!isLoggedIn}" -->
-    <div clas="card" style="background-color: #f1ede7;height:calc(98vh - 48px);;overflow: auto;"  >
+    <div clas="card" style="background-color: #e3eded;height:calc(98vh - 48px);;overflow: auto;"  >
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
