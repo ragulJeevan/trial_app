@@ -89,38 +89,40 @@
         <button style="width:100%" (click)="openShiftModal(add,'add','')"
             class="btn btn-primary btn-lg btn-block">{{addButton}}</button>
     </div>
-    <div class="row my-2">
-        <div class="col-md-4 my-2 flex-center" *ngFor="let list of shiftList">
-            <div class="card card-data">
-                <div class="card-body" (click)="openShiftModal(add,'Edit',list)" >
-                    <div class="card-title  display-6">
-                        <span class="bold">{{list.shift_name}}</span>
+    <div class="mob-overflow">
+        <div class="row my-2 ">
+            <div class="col-md-4 my-2 flex-center" *ngFor="let list of shiftList">
+                <div class="card card-data">
+                    <div class="card-body" (click)="openShiftModal(add,'Edit',list)" >
+                        <div class="card-title  display-6">
+                            <span class="bold">{{list.shift_name}}</span>
+                        </div>
+                        <div class="flex-space-between">
+                            <div>
+                                <span class="bold">Duration : </span>
+                                <span>{{list.duration}}</span>
+                            </div>
+                            <div class="bold">
+                                <span > {{list?.start_time}} </span> - <span > {{list?.end_time}} </span>
+                            </div>
+                        </div>
+    
+                        <div class="flex-space-between">
+                            <div>
+                                <span class="bold">Created By : </span>
+                                <span>{{getUser(list.created_by)}}</span>
+                            </div>
+    
+                            <div>
+                                <span class="bold">Is Active : </span> <span>{{list.site_life ? 'Active' :
+                                    'In-Active'}}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex-space-between">
-                        <div>
-                            <span class="bold">Duration : </span>
-                            <span>{{list.duration}}</span>
-                        </div>
-                        <div class="bold">
-                            <span > {{list?.start_time}} </span> - <span > {{list?.end_time}} </span>
-                        </div>
-                    </div>
-
-                    <div class="flex-space-between">
-                        <div>
-                            <span class="bold">Created By : </span>
-                            <span>{{getUser(list.created_by)}}</span>
-                        </div>
-
-                        <div>
-                            <span class="bold">Is Active : </span> <span>{{list.site_life ? 'Active' :
-                                'In-Active'}}</span>
-                        </div>
-                    </div>
+                    <!-- <div class="card-footer d-grid">
+                            <button class="btn btn-dark btn-block" (click)="routeAction()" >{{action}}</button>
+                        </div> -->
                 </div>
-                <!-- <div class="card-footer d-grid">
-                        <button class="btn btn-dark btn-block" (click)="routeAction()" >{{action}}</button>
-                    </div> -->
             </div>
         </div>
     </div>

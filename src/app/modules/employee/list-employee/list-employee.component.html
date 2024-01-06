@@ -121,38 +121,41 @@
         <button style="width:100%" (click)="openEmployeeModal(add,'add','')"
             class="btn btn-primary btn-lg btn-block">{{addButton}}</button>
     </div>
-    <div class="row my-2">
-        <div class="col-md-4 my-2 flex-center" *ngFor="let list of employeeList">
-            <div class="card card-data">
-                <div class="card-body" (click)="openEmployeeModal(add,'Edit',list)" >
-                    <div class="card-title  display-6">
-                        <span class="bold">{{list.emp_name}}</span>
-                    </div>
-                    <div class="flex-space-between">
-                        <div>
-                            <div class="bold">Empoyee Role </div>
-                            <div>{{getRole(list.role_id)}}</div>
+    <div class="mob-overflow">
+        <div class="row my-2">
+            <div class="col-md-4 my-2 flex-center" *ngFor="let list of employeeList">
+                <div class="card card-data">
+                    <div class="card-body" (click)="openEmployeeModal(add,'Edit',list)" >
+                        <div class="card-title  display-6">
+                            <span class="bold">{{list.emp_name}}</span>
                         </div>
-                        <div>
-                            <div class="bold">Empoyee Department</div>
-                            <div>{{getDep(list.dep_id)}}</div>
-                        </div>
-                    </div>
-                    <div class="flex-space-between" >
-                        <div>
-                            <div class="bold">Wage Per Shift</div>
-                            <div>{{list.wage}}</div>
-                        </div>
-                        <div>
+                        <div class="flex-space-between">
                             <div>
-                                <div class="bold">Created By</div>
-                                <div>{{getUser(list.created_by)}}</div>
+                                <div class="bold">Empoyee Role </div>
+                                <div>{{getRole(list.role_id)}}</div>
+                            </div>
+                            <div>
+                                <div class="bold">Empoyee Department</div>
+                                <div>{{getDep(list.dep_id)}}</div>
+                            </div>
+                        </div>
+                        <div class="flex-space-between" >
+                            <div>
+                                <div class="bold">Wage Per Shift</div>
+                                <div>{{list.wage}}</div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="bold">Created By</div>
+                                    <div>{{getUser(list.created_by)}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 <!-- ADD MODAL  -->
