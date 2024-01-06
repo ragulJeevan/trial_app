@@ -18,7 +18,7 @@ export class HomeComponent {
       shareReplay()
     );
 
-    public title : string = 'Construction App';
+    public title : string = 'Kantha Constrcutions';
     public menu : string = 'MENU';
     public isLoggedIn : boolean = false;
 
@@ -29,11 +29,9 @@ export class HomeComponent {
     ) {}
 
   ngOnInit() : void {
-    let loggedIn : any =localStorage.getItem('logged');
+    let loggedIn : any =localStorage.getItem('usD');
     this.commonService.getLoggIN.subscribe((data:any)=>{
-      if(data){
-        this.isLoggedIn = true;
-      }
+      this.isLoggedIn = data;
     })
     if(loggedIn){
       this.isLoggedIn = true;
@@ -47,6 +45,13 @@ export class HomeComponent {
     // this.commonService.setLoggIn(false);
     this.router.navigate(['/login']);
     localStorage.clear();
+  }
+
+  loader(){
+    this.commonService.setLoader(true);
+    setTimeout(() => {
+      this.commonService.setLoader(false);
+    }, 3000);
   }
 
 }

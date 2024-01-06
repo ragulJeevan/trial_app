@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import { AttendanceModule } from './modules/attendance/attendance.module';
 import { SettingModule } from './modules/setting/setting.module';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SettingModule } from './modules/setting/setting.module';
     FooterComponent,
     HomeComponent,
     LoginComponent,
+    LoaderComponent
   ],
   imports: [
     // BrowserModule,

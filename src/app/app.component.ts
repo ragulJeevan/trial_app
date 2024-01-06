@@ -1,4 +1,5 @@
 import { Component,OnInit } from '@angular/core';
+import { CommonServiceService } from './services/common-service.service';
 
 @Component({
   selector: 'app-root',
@@ -6,14 +7,20 @@ import { Component,OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private title = 'construction-app';
+  private title = 'Modular-X';
 
-  constructor(){
+  public isLoader : boolean = false;
+
+  constructor(
+    private commonService : CommonServiceService,
+  ){
 
   }
 
   ngOnInit() : void {
-
+    this.commonService.getLoader.subscribe((loader:any)=>{
+      this.isLoader = loader
+    })
   }
 
 }

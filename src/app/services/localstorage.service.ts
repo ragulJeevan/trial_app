@@ -15,8 +15,8 @@ export class LocalstorageService {
 
   getData(getName: string) {
     let storedData: any = localStorage.getItem(`${getName}`);
-    let data = atob(storedData);
-    let decodedData: any = (JSON.parse(data));
+    let data = storedData ? atob(storedData) : null;
+    let decodedData: any = data ?(JSON.parse(data)) : null;
     return decodedData;
   }
   clearStorage() {

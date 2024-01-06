@@ -13,15 +13,14 @@ export class AuthenticationGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     // let loggedInDetails: any = localStorage.getItem('logged');
+
     let loggedInDetails: any = this.storageService.getData('usD');
-    if (
-      loggedInDetails && loggedInDetails != null
-    ) {
-      this.router.navigate(['sites/list-site']);
-    } else {
-      this.router.navigate(['/login']);
+    let result = (loggedInDetails && loggedInDetails != null)? true : false  ;
+    if(!result){
+      this.router.navigate(['/login'])
     }
-    return true;
+    return result ;
   }
 
 }
+

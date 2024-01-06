@@ -47,14 +47,16 @@ export class LoginComponent implements OnInit {
     this.commonService.logIn(url, payLoad).subscribe((res: any) => {
       if (res.data) {
         this.loggedInUser = res.data ? res.data : [];
-        if (this.loggedInUser && this.loggedInUser.length > 0) {
-          this.storageService.postData('usD', this.loggedInUser[0]);
-          if (this.loggedInUser[0].role_id == '64f4a0a207c44fa32886c541') {
-            this.router.navigate(['sites/list-site']);
-          } else {
-            this.router.navigate(['attendance/mark-attendance']);
-          }
-        }
+        this.storageService.postData('usD', this.loggedInUser[0]);
+        this.router.navigate(['/site-list']);
+        // if (this.loggedInUser && this.loggedInUser.length > 0) {
+        //   this.storageService.postData('usD', this.loggedInUser[0]);
+        //   if (this.loggedInUser[0].role_id == '64f4a0a207c44fa32886c541') {
+        //     this.router.navigate(['sites/list-site']);
+        //   } else {
+        //     this.router.navigate(['attendance/mark-attendance']);
+        //   }
+        // } 
         this.commonService.setLoggIn(true);
       }
     },

@@ -11,10 +11,19 @@ const base_url = environment.base_url;
 export class CommonServiceService {
 
   private _logged$ = new BehaviorSubject<boolean>(false);
+  private _loader$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private http: HttpClient
   ) { }
+
+  // LOADER 
+  setLoader(data: any) {
+    this._loader$.next(data);
+  }
+  get getLoader() {
+    return this._loader$.asObservable();
+  }
 
   // AFTER LOGGING IN 
   setLoggIn(data: any) { if (data) { this._logged$.next(data); } }
