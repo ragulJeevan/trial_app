@@ -15,6 +15,9 @@ import { LocalstorageService } from 'src/app/services/localstorage.service';
 })
 export class ListEmployeeComponent implements OnInit {
 
+  public isAdmin : boolean = false;
+  public addButton : string = 'Add Employee'
+
   public page_no: number = 1;
   public per_page: number = 10;
   public total!: number;
@@ -46,13 +49,14 @@ export class ListEmployeeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.commonService.setHeader('Employee List');
     this.userDetails = this.storageService.getData('usD');
     this.employeeForm = new FormGroup({
       emp_name: new FormControl('', Validators.required),
+      wage : new FormControl('', Validators.required),
       dep_id: new FormControl('', Validators.required),
       role_id: new FormControl('', Validators.required),
-      sub_dep_id: new FormControl(''),
-      isActive: new FormControl(false),
+      isActive: new FormControl(true),
     });
     this.getRoleList();
     this.getDepartmentList();
@@ -115,9 +119,10 @@ export class ListEmployeeComponent implements OnInit {
     if (item == 'Edit') {
       this.employeeForm.patchValue({
         emp_name: data?.emp_name ? data?.emp_name : '',
+        wage : data?.wage,
         dep_id: data?.dep_id ? data?.dep_id : '',
         role_id: data?.role_id ? data?.role_id : '',
-        sub_dep_id: data?.sub_dep_id ? data?.sub_dep_id : '',
+        // sub_dep_id: data?.sub_dep_id ? data?.sub_dep_id : '',
         isActive: data.is_Active
       });
       this.isAdd = false;
@@ -141,9 +146,8 @@ export class ListEmployeeComponent implements OnInit {
     let payLoad = {
       "emp_name": dep.emp_name,
       "client_id": this.userDetails.client_id,
-      "client_name": this.userDetails.client_name,
+      "wage":  dep.wage,
       "dep_id": dep.dep_id,
-      "sub_dep_id": dep.sub_dep_id,
       "role_id": dep.role_id,
       "is_Active": dep.isActive,
       "created_by": this.userDetails._id,
@@ -179,9 +183,9 @@ export class ListEmployeeComponent implements OnInit {
     let payLoad = {
       "emp_name": dep.emp_name,
       "client_id": this.userDetails.client_id,
-      "client_name": this.userDetails.client_name,
+      "wage":  dep.wage,
       "dep_id": dep.dep_id,
-      "sub_dep_id": dep.sub_dep_id,
+      // "sub_dep_id": dep.sub_dep_id,
       "role_id": dep.role_id,
       "is_Active": dep.isActive,
       "updated_by": this.userDetails._id,
