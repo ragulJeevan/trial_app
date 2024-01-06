@@ -211,6 +211,7 @@ export class ListEmployeeComponent implements OnInit {
 
   close() {
     this.restForm();
+    this.isAdd = true;
     this.modalService.dismissAll();
   }
 

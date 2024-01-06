@@ -152,6 +152,7 @@ export class ListDepartmentComponent implements OnInit {
   }
   close() {
     this.departmentForm.reset();
+    this.isAdd = true;
     this.modalService.dismissAll();
   }
 

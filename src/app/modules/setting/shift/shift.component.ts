@@ -68,6 +68,7 @@ export class ShiftComponent implements OnInit {
   // CLOSE MODAL 
   close() {
     this.shiftForm.reset();
+    this.isAdd = true;
     this.modalService.dismissAll();
   }
   // TO GET SHIFT 

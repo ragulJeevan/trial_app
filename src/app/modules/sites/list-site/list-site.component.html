@@ -98,46 +98,45 @@
     </div>
 </div>
 
+<!--  -->
+<!-- MOBILE  -->
 <div *ngIf="!isAdmin" class="container my-3">
     <div>
         <button style="width:100%" (click)="openSiteModal(add,'add','')"
-            class="btn btn-dark btn-lg btn-block">{{addButton}}</button>
+            class="btn btn-primary btn-lg btn-block">{{addButton}}</button>
     </div>
     <div class="mob-overflow">
-        <div class="row my-2 ">
-            <div class="col-md-4 my-2" *ngFor="let sites of siteList" style="display: flex;justify-content: center;">
-                <div class="card" style="width:23rem">
-                    <div class="card-body">
+        <div class="row my-2">
+            <div class="col-md-4 my-2 flex-center" *ngFor="let list of siteList">
+                <div class="card card-data">
+                    <div class="card-body" (click)="openSiteModal(add,'Edit',list)">
                         <div class="card-title  display-6">
-                            <span style="font-weight:bold">{{sites.site_name}}</span>
+                            <span class="bold">{{list.site_name}}</span>
                         </div>
-    
-                        <div style="display: flex;justify-content: space-between;">
+                        <div class="flex-space-between">
                             <div>
-                                <span style="font-weight: bold;">Created By : </span>
-                                <span>{{getUser(sites.created_by)}}</span>
+                                <div class="bold">Created By</div>
+                                <div>{{getUser(list.created_by)}}</div>
                             </div>
-    
                             <div>
-                                <span style="font-weight: bold;">Is Active : </span> <span>{{sites.site_life ? 'Active' :
-                                    'In-Active'}}</span>
+                                <div class="bold">Is Active : </div>
+                                <div>{{list.is_Active ? 'Active' :
+                                    'In-Active'}}</div>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="card-footer d-grid">
-                            <button class="btn btn-dark btn-block" (click)="routeAction()" >{{action}}</button>
-                        </div> -->
                 </div>
             </div>
         </div>
-        
     </div>
 </div>
+<!-- MODAL  -->
 
 <ng-template #add let-modal>
     <div class="modal-content">
-        <div class="modal-header">
-            <h3>ADD DEPARTMENT</h3>
+        <div class="modal-header bg-primary flex-center">
+            <div *ngIf="isAdd" class="fwd-bold">ADD SITE</div>
+            <div *ngIf="!isAdd" class="fwd-bold">UPDATE SITE</div>
         </div>
         <div class="modal-body">
             <form [formGroup]="siteForm">
@@ -157,7 +156,7 @@
                 </div>
             </form>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer flex-center">
             <button *ngIf="isAdd" class="btn btn-primary" (click)="addSite()">Add</button>
             <button *ngIf="!isAdd" class="btn btn-primary" (click)="updateSite()">Update</button>
             <button class="btn btn-outline-secondary" (click)="close()">Close</button>

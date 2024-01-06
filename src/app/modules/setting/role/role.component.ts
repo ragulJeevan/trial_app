@@ -90,6 +90,7 @@ export class RoleComponent implements OnInit {
   // CLOSE MODAL 
   close() {
     this.roleForm.reset();
+    this.isAdd = true;
     this.modalService.dismissAll();
   }
   // TO ADD SHIFT 

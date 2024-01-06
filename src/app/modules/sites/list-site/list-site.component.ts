@@ -44,6 +44,7 @@ export class ListSiteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.commonService.setHeader('Department List');
     this.userDetails = this.storageService.getData('usD');
     this.siteForm = new FormGroup({
       siteName: new FormControl('', Validators.required),
@@ -52,32 +53,6 @@ export class ListSiteComponent implements OnInit {
     });
     this.getSiteList(1);
     this.getUserList();
-    this.siteList = [
-      {
-        site_name : 'Babu Nagar',
-        department_count : 4,
-        employee_count : 23,
-        site_life : true
-      },
-      {
-        site_name : 'Nawin Nagar',
-        department_count : 0,
-        employee_count : 0,
-        site_life : true
-      },
-      {
-        site_name : 'Rajan Nagar',
-        department_count : 1,
-        employee_count : 6,
-        site_life : true
-      },
-      {
-        site_name : 'Selvam Nagar',
-        department_count : 0,
-        employee_count : 0,
-        site_life : false
-      },
-    ]
   }
 
   getSiteList(Page: any) {
@@ -161,7 +136,7 @@ export class ListSiteComponent implements OnInit {
       return;
     };
 
-    let url = `role/edit/${this.currentSite._id}`;
+    let url = `sites/edit/${this.currentSite._id}`;
     let payLoad = {
       "site_name": site.siteName,
       "is_Active": site.isActive,
@@ -184,6 +159,7 @@ export class ListSiteComponent implements OnInit {
   }
   close() {
     this.siteForm.reset();
+    this.isAdd = true;
     this.modalService.dismissAll();
   }
   // TO GET USER DETAILS 
