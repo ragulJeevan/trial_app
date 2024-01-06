@@ -15,6 +15,9 @@ import { LocalstorageService } from 'src/app/services/localstorage.service';
 })
 export class ListDepartmentComponent implements OnInit {
 
+  public isAdmin : boolean = false;
+  public addButton : string = 'Add Depatment'
+
   public page_no: number = 1;
   public per_page: number = 10;
   public total!: number;
@@ -43,6 +46,7 @@ export class ListDepartmentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.commonService.setHeader('Department List');
     this.userDetails = this.storageService.getData('usD');
     this.departmentForm = new FormGroup({
       depName: new FormControl('', Validators.required),
@@ -107,6 +111,7 @@ export class ListDepartmentComponent implements OnInit {
     };
     this.departmentService.postDep(url, payLoad).subscribe((res: any) => {
       if (res && res.data) {
+        this.toastr.success(res?.statusMessage);
         this.getDepartmentList(1);
         this.close();
       }
@@ -134,6 +139,7 @@ export class ListDepartmentComponent implements OnInit {
     };
     this.departmentService.putDep(url, payLoad).subscribe((res: any) => {
       if (res && res.data) {
+        this.toastr.success(res?.statusMessage);
         this.getDepartmentList(1);
         this.close();
       }

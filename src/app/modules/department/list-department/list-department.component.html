@@ -1,4 +1,4 @@
-<div class="card">
+<div *ngIf="isAdmin" class="card">
     <div class="card-body" style="height:70vh">
         <div class="row mx-2">
             <div class="col-md-6">
@@ -103,11 +103,45 @@
         </div>
     </div>
 </div>
-
+<!--  -->
+<!-- MOBILE  -->
+<div *ngIf="!isAdmin" class="container my-3">
+    <div>
+        <button style="width:100%" (click)="openDepartmentModal(add,'add','')"
+            class="btn btn-primary btn-lg btn-block">{{addButton}}</button>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-4 my-2 flex-center" *ngFor="let list of departmentList">
+            <div class="card card-data">
+                <div class="card-body" (click)="openDepartmentModal(add,'edit',list)" >
+                    <div class="card-title  display-6">
+                        <span class="bold">{{list.department_name}}</span>
+                    </div>
+                    <div class="flex-space-between">
+                        <div>
+                            <div class="bold">Empoyee Count </div>
+                            <!-- <div>{{list.emp_count}}</div> -->
+                            <div>0</div>
+                        </div>
+                        <div>
+                            <div class="bold">Created By</div>
+                            <div>{{getUser(list.created_by)}}</div>
+                        </div>
+                        <div>
+                            <div class="bold">Is Active : </div> <div>{{list.site_life ? 'Active' :
+                                'In-Active'}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL  -->
 <ng-template #add let-modal>
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>ADD DEPARTMENT</h3>
+    <div class="modal-header bg-primary flex-center" >
+            <div *ngIf="isAdd" class="fwd-bold" >ADD DPARTMENT</div>
+            <div *ngIf="!isAdd" class="fwd-bold" >UPDATE DPARTMENT</div>
         </div>
         <div class="modal-body">
 
@@ -138,10 +172,9 @@
 
 
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer flex-center">
             <button *ngIf="isAdd" class="btn btn-primary" (click)="addDepartment()">Add</button>
             <button *ngIf="!isAdd" class="btn btn-primary" (click)="updateDepartment()">Update</button>
             <button class="btn btn-outline-secondary" (click)="close()">Close</button>
         </div>
-    </div>
 </ng-template>
