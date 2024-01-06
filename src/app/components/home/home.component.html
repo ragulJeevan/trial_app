@@ -6,16 +6,16 @@
     <mat-toolbar style="color: whitesmoke;" >{{menu}}</mat-toolbar>
     <mat-nav-list>
       <a  (click)="drawer.toggle()"  mat-list-item routerLink="">HOME</a>
-      <a  (click)="drawer.toggle()"  mat-list-item routerLink="/shift">SHIFT</a>
-      <a  (click)="drawer.toggle()"  mat-list-item routerLink="/role">ROLE</a>
-      <a  (click)="drawer.toggle()" mat-list-item routerLink="/department-list" >DEPARTMENTS</a>
-      <a  (click)="drawer.toggle()" mat-list-item routerLink="/employee-list" >EMPLOYEE LIST</a>
-      <a  (click)="drawer.toggle()" mat-list-item routerLink="/list-site" >SITES</a>
+      <a  (click)="drawer.toggle()"  mat-list-item routerLink="/setup/shift">SHIFT</a>
+      <a  (click)="drawer.toggle()"  mat-list-item routerLink="/setup/role">ROLE</a>
+      <a  (click)="drawer.toggle()" mat-list-item routerLink="/depart/list-department" >DEPARTMENTS</a>
+      <a  (click)="drawer.toggle()" mat-list-item routerLink="/emp/employee-list" >EMPLOYEE LIST</a>
+      <a  (click)="drawer.toggle()" mat-list-item routerLink="sites//list-site" >SITES</a>
       <a  (click)="drawer.toggle()" mat-list-item routerLink="attendance/mark-attendance" >MARK ATTENDANCE</a>
       <a  (click)="drawer.toggle()" mat-list-item routerLink="attendance/mark-attendance" >ADD INVENTORY</a>
       <a  (click)="drawer.toggle()" mat-list-item routerLink="attendance/mark-attendance" >ADD EXPENSE</a>
       <!-- <a  mat-list-item routerLink="reports/attendance-report">ATTENDANCE REPORT</a> -->
-      <a  mat-list-item (click)="logout()" >LOGOUT</a>
+      <a  mat-list-item (click)="logout();drawer.toggle()" >LOGOUT</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

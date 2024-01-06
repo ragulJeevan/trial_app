@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SiteListComponent } from './modules/sites/site-list/site-list.component';
+
 import { LoginComponent } from './components/login/login.component';
 import { AuthenticationGuard } from './guards/authentication.guard';
 import { HomeComponent } from './components/home/home.component';
+import { SiteListComponent } from './components/site-list/site-list.component';
 
 //Department module routing
 const departmentMOdule = () => import('src/app/modules/department/department.module').then(x => x.DepartmentModule);
@@ -24,6 +25,7 @@ const setup = () => import('src/app/modules/setting/setting.module').then(x => x
 
 const routes: Routes = [
   { path: '', component: SiteListComponent, canActivate: [AuthenticationGuard]  },
+  { path: 'site-list', component: SiteListComponent,canActivate: [AuthenticationGuard] },
   { path: 'login', component: LoginComponent },
   //Department module
   { path: 'depart', loadChildren: departmentMOdule,canActivate: [AuthenticationGuard] },

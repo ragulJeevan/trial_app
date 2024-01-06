@@ -26,6 +26,7 @@ import { AttendanceModule } from './modules/attendance/attendance.module';
 import { SettingModule } from './modules/setting/setting.module';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BasicHttpService } from './services/basic-http.service';
+import { SiteListComponent } from './components/site-list/site-list.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { BasicHttpService } from './services/basic-http.service';
     FooterComponent,
     HomeComponent,
     LoginComponent,
-    LoaderComponent
+    LoaderComponent,
+    SiteListComponent
   ],
   imports: [
     // BrowserModule,
@@ -44,9 +46,6 @@ import { BasicHttpService } from './services/basic-http.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DepartmentModule,
-    EmployeeModule,
-    SitesModule,
     MaterialModuleModule,
     ToastrModule.forRoot(),
     SharedModule,
@@ -56,8 +55,6 @@ import { BasicHttpService } from './services/basic-http.service';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    AttendanceModule,
-    SettingModule
     // NgbModal
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: BasicHttpService, multi: true }],
