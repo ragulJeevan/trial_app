@@ -13,17 +13,27 @@ import { LocalstorageService } from 'src/app/services/localstorage.service';
 })
 export class RoleComponent implements OnInit {
 
-  public isAdmin : boolean = false
+  public isAdmin : boolean = false;
+  public addButton : string = 'Add Role'
 
   public roleForm!: FormGroup;
   public roleList: any = [];
   public userDetails: any = [];
-  public isAddRole: boolean = true;
+  public isAdd: boolean = true;
   public currentRole: any = {};
   public options = [
-    { label: 'Active', value: true },
-    { label: 'Inactive', value: false }
+    { label: '1', value: 1 },
+    { label: '2', value: 2 },
+    { label: '3', value: 3 },
+    { label: '4', value: 4 },
+    { label: '5', value: 5 },
+    { label: '6', value: 6 },
   ];
+  public options1 = [
+    { label: 'Active', value: true },
+    { label: 'Disable', value: false },
+  ];
+
   public userList: any = [];
 
   constructor(
@@ -34,10 +44,12 @@ export class RoleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.commonService.setHeader('Role List');
     this.userDetails = this.storageService.getData('usD');
     this.roleForm = new FormGroup({
       roleName: new FormControl(null, Validators.required),
-      isActive: new FormControl(false),
+      isActive: new FormControl(true),
+      auth: new FormControl(null, Validators.required),
     });
     this.getRoleList();
     this.getUserList();
@@ -47,7 +59,7 @@ export class RoleComponent implements OnInit {
     this.commonService.getData(url).subscribe((res: any) => {
       if (res && res.data) {
         this.roleList = res.data ? res.data : [];
-        this.isAddRole = true;
+        this.isAdd = true;
       }
     }, ((err: any) => {
       console.log(err.error);
@@ -60,10 +72,11 @@ export class RoleComponent implements OnInit {
   // TO OPEN SHIFT MODAL 
   openRoleModal(modal: any, type: string, data: any) {
     if (type == 'Edit') {
-      this.isAddRole = false;
+      this.isAdd = false;
       this.roleForm.patchValue({
         roleName: data.role_name,
-        isActive: data.is_Active
+        isActive: data.is_Active,
+        auth : data?.role_authority
       });
       this.currentRole = data;
     }
@@ -90,6 +103,7 @@ export class RoleComponent implements OnInit {
     let url = "role/add";
     let payLoad = {
       "role_name": role.roleName,
+      "role_authority":role?.auth,
       "is_Active": role.isActive,
       "client_id": this.userDetails.client_id,
       "created_by": this.userDetails._id,

@@ -21,7 +21,7 @@ export class ShiftComponent implements OnInit {
   public shiftForm!: FormGroup;
   public shiftList: any = [];
   public userDetails: any = [];
-  public isAddShift: boolean = true;
+  public isAdd: boolean = true;
   public currentShift: any = {};
   public userList: any = [];
 
@@ -49,7 +49,7 @@ export class ShiftComponent implements OnInit {
   // TO OPEN SHIFT MODAL 
   openShiftModal(modal: any, type: string, data: any) {
     if (type == 'Edit') {
-      this.isAddShift = false;
+      this.isAdd = false;
       this.shiftForm.patchValue({
         shiftName: data.shift_name,
         timeZone: 'IST',
@@ -76,7 +76,7 @@ export class ShiftComponent implements OnInit {
     this.commonService.getData(url).subscribe((res: any) => {
       if (res && res.data) {
         this.shiftList = res.data ? res.data : [];
-        this.isAddShift = true;
+        this.isAdd = true;
       }
     }, ((err: any) => {
       console.log(err.error);

@@ -14,8 +14,20 @@ body {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+.bold{
+    font-weight: bold !important;
+}
 .flex-center{
     display:flex;
     justify-content: center;
+}
+.flex-space-between{
+    display:flex;
+    justify-content: space-between;
+}
+.card-data{
+    width: 23rem;
+    cursor: pointer;
+    background-color: aliceblue;
+    border-radius: 10px;
 }

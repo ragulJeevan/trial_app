@@ -90,30 +90,30 @@
             class="btn btn-primary btn-lg btn-block">{{addButton}}</button>
     </div>
     <div class="row my-2">
-        <div class="col-md-4 my-2" *ngFor="let sites of shiftList" style="display: flex;justify-content: center;">
-            <div class="card" style="width:23rem;cursor: pointer;    background-color: aliceblue;border-radius: 10px;">
-                <div class="card-body" (click)="openShiftModal(add,'Edit',sites)" >
+        <div class="col-md-4 my-2 flex-center" *ngFor="let list of shiftList">
+            <div class="card card-data">
+                <div class="card-body" (click)="openShiftModal(add,'Edit',list)" >
                     <div class="card-title  display-6">
-                        <span style="font-weight:bold">{{sites.shift_name}}</span>
+                        <span class="bold">{{list.shift_name}}</span>
                     </div>
-                    <div style="display: flex;justify-content: space-between;">
+                    <div class="flex-space-between">
                         <div>
-                            <span style="font-weight: bold;">Duration : </span>
-                            <span>{{sites.duration}}</span>
+                            <span class="bold">Duration : </span>
+                            <span>{{list.duration}}</span>
                         </div>
-                        <div>
-                            <span > {{sites?.start_time}} </span> - <span > {{sites?._time}} </span>
+                        <div class="bold">
+                            <span > {{list?.start_time}} </span> - <span > {{list?.end_time}} </span>
                         </div>
                     </div>
 
-                    <div style="display: flex;justify-content: space-between;">
+                    <div class="flex-space-between">
                         <div>
-                            <span style="font-weight: bold;">Created By : </span>
-                            <span>{{getUser(sites.created_by)}}</span>
+                            <span class="bold">Created By : </span>
+                            <span>{{getUser(list.created_by)}}</span>
                         </div>
 
                         <div>
-                            <span style="font-weight: bold;">Is Active : </span> <span>{{sites.site_life ? 'Active' :
+                            <span class="bold">Is Active : </span> <span>{{list.site_life ? 'Active' :
                                 'In-Active'}}</span>
                         </div>
                     </div>
@@ -129,7 +129,8 @@
 <ng-template #add let-modal>
     <div class="modal-content">
         <div class="modal-header bg-primary flex-center" >
-            <div style="font-weight: bold;font-size:20px" >ADD SHIFT</div>
+            <div *ngIf="isAdd" class="fwd-bold" >ADD SHIFT</div>
+            <div *ngIf="!isAdd" class="fwd-bold" >UPDATE SHIFT</div>
         </div>
         <div class="modal-body">
             <form [formGroup]="shiftForm">
@@ -164,8 +165,8 @@
 
         </div>
         <div class="modal-footer flex-center">
-            <button *ngIf="isAddShift" class="btn btn-lg btn-primary" (click)="addShift()">Add</button>
-            <button *ngIf="!isAddShift" class="btn btn-lg btn-primary" (click)="updateShift()">Update</button>
+            <button *ngIf="isAdd" class="btn btn-lg btn-primary" (click)="addShift()">Add</button>
+            <button *ngIf="!isAdd" class="btn btn-lg btn-primary" (click)="updateShift()">Update</button>
             <button class="btn btn-lg btn-outline-secondary" (click)="close()">Close</button>
         </div>
     </div>
