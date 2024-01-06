@@ -1,7 +1,12 @@
-<div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+<div class="container-fluid d-flex align-items-center justify-content-center" style="height: 93vh;">
   <div class="card shadow-lg">
     <div class="card-header " style="background-color: #5F6780;" >
-      <h2 class=" text-center mb-4 mt-4"> <span style="font-weight: bold;font-size:50px;color:white">Login</span></h2>
+      <div style="display: flex;justify-content: center;" >
+        <div class="logo"> 
+          <img   src="../../../assets/Icons/kantha_logo.svg" alt="logo" height="100" width="100" >
+        </div>
+      </div>
+      <!-- <h2 class=" text-center mb-4 mt-4"> <span style="font-weight: bold;font-size:50px;color:white">Login</span></h2> -->
     </div>
     <div class="card-body">
 
@@ -26,7 +31,7 @@
       </form>
     </div>
     <div class="card-footer" style="display: flex;justify-content: center;">
-      <button style="background-color: #5F6780;color:white" type="submit" class="btn   mt-4" (click)="submitForm()">Submit</button>
+      <button style="background-color: #5F6780;color:white" type="submit" class="btn  btn-lg btn-block" (click)="submitForm()">Submit</button>
     </div>
   </div>
 </div>

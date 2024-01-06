@@ -3,7 +3,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DepartmentModule } from './modules/department/department.module';
 import { EmployeeModule } from './modules/employee/employee.module';
 import { SitesModule } from './modules/sites/sites.module';
@@ -25,6 +25,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AttendanceModule } from './modules/attendance/attendance.module';
 import { SettingModule } from './modules/setting/setting.module';
 import { LoaderComponent } from './components/loader/loader.component';
+import { BasicHttpService } from './services/basic-http.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     SettingModule
     // NgbModal
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: BasicHttpService, multi: true }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
