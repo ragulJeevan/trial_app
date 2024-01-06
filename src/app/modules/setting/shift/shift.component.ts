@@ -15,6 +15,8 @@ import { LocalstorageService } from 'src/app/services/localstorage.service';
 })
 export class ShiftComponent implements OnInit {
 
+  public isAdmin : boolean = false;
+
   public shiftForm!: FormGroup;
   public shiftList: any = [];
   public userDetails: any = [];

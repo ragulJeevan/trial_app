@@ -13,6 +13,10 @@ import { LocalstorageService } from 'src/app/services/localstorage.service';
 })
 export class ListSiteComponent implements OnInit {
 
+  public isAdmin : boolean = false;
+
+  public addButton : string = "Add Site";
+
   public page_no: number = 1;
   public per_page: number = 10;
   public total!: number;
@@ -48,6 +52,32 @@ export class ListSiteComponent implements OnInit {
     });
     this.getSiteList(1);
     this.getUserList();
+    this.siteList = [
+      {
+        site_name : 'Babu Nagar',
+        department_count : 4,
+        employee_count : 23,
+        site_life : true
+      },
+      {
+        site_name : 'Nawin Nagar',
+        department_count : 0,
+        employee_count : 0,
+        site_life : true
+      },
+      {
+        site_name : 'Rajan Nagar',
+        department_count : 1,
+        employee_count : 6,
+        site_life : true
+      },
+      {
+        site_name : 'Selvam Nagar',
+        department_count : 0,
+        employee_count : 0,
+        site_life : false
+      },
+    ]
   }
 
   getSiteList(Page: any) {

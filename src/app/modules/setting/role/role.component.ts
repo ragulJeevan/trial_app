@@ -13,6 +13,8 @@ import { LocalstorageService } from 'src/app/services/localstorage.service';
 })
 export class RoleComponent implements OnInit {
 
+  public isAdmin : boolean = false
+
   public roleForm!: FormGroup;
   public roleList: any = [];
   public userDetails: any = [];

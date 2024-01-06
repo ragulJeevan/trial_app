@@ -1,25 +1,31 @@
-<div class="container my-3">
+<div class="container my-3"  >
+  <div >
+    <button style="width:100%"  class="btn btn-dark btn-lg btn-block" (click)="routeAction()" >{{add}}</button>
+  </div>
     <div class="row my-2">
-        <div class="col-md-4 my-2" *ngFor = "let sites of siteList">
-            <div class="card" style="width:18rem" >
+        <div class="col-md-4 my-2" *ngFor = "let sites of siteList" style="display: flex;justify-content: center;" >
+            <div class="card" style="width:23rem" >
+             <!-- <div class="card-header  ">
+              <div class="card-title text-center display-6"></div>
+             </div> -->
                 <div class="card-body">
-                    <div class="card-title text-center bg-secondary display-6"><b>{{sites.site_name}}</b> </div>
-                    <hr>
-                    <div class="card-text">
-                      <p> 
-                        <span>No Of Employee :</span> <span>{{sites.employee_count}}</span>
-                      </p>
-                      <p> 
-                        <span>No Of Department :</span> <span>{{sites.department_count}}</span>
-                      </p>
-                      <p> 
-                        <span>Is Active :</span> <span>{{sites.site_life ? 'Active' : 'In-Active'}}</span>
-                      </p>
+                  <div class="card-title  display-6"  >
+                    <span  style="font-weight:bold" >{{sites.site_name}}</span> 
+                  </div>
+                  
+                    <div style="display: flex;justify-content: space-between;" >
+                      <div>
+                        <span style="font-weight: bold;" >Created By : </span> <span>{{sites.employee_count}}</span>
+                      </div>
+                      
+                      <div>
+                        <span style="font-weight: bold;" >Is Active : </span> <span>{{sites.site_life ? 'Active' : 'In-Active'}}</span>
+                      </div>
                     </div>
-                    <div class="card-footer d-grid">
-                        <button class="btn btn-dark btn-block" (click)="routeAction()" >{{action}}</button>
-                    </div>
-                </div>
+                  </div>
+                  <!-- <div class="card-footer d-grid">
+                      <button class="btn btn-dark btn-block" (click)="routeAction()" >{{action}}</button>
+                  </div> -->
             </div>
         </div>
     </div>

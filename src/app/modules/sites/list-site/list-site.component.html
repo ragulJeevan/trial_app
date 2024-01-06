@@ -1,4 +1,4 @@
-<div class="card">
+<div *ngIf="isAdmin" class="card">
     <div class="card-body" style="height:70vh">
         <div class="row mx-2">
             <div class="col-md-6">
@@ -94,6 +94,39 @@
                     </tr>
                 </tbody>
             </table> -->
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!isAdmin" class="container my-3">
+    <div>
+        <button style="width:100%" (click)="openSiteModal(add,'add','')"
+            class="btn btn-dark btn-lg btn-block">{{addButton}}</button>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-4 my-2" *ngFor="let sites of siteList" style="display: flex;justify-content: center;">
+            <div class="card" style="width:23rem">
+                <div class="card-body">
+                    <div class="card-title  display-6">
+                        <span style="font-weight:bold">{{sites.site_name}}</span>
+                    </div>
+
+                    <div style="display: flex;justify-content: space-between;">
+                        <div>
+                            <span style="font-weight: bold;">Created By : </span>
+                            <span>{{getUser(sites.created_by)}}</span>
+                        </div>
+
+                        <div>
+                            <span style="font-weight: bold;">Is Active : </span> <span>{{sites.site_life ? 'Active' :
+                                'In-Active'}}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card-footer d-grid">
+                        <button class="btn btn-dark btn-block" (click)="routeAction()" >{{action}}</button>
+                    </div> -->
+            </div>
         </div>
     </div>
 </div>

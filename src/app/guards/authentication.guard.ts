@@ -16,10 +16,11 @@ export class AuthenticationGuard implements CanActivate {
 
     let loggedInDetails: any = this.storageService.getData('usD');
     let result = (loggedInDetails && loggedInDetails != null)? true : false  ;
-    if(!result){
-      this.router.navigate(['/login'])
-    }
-    return result ;
+    // if(!result){
+    //   this.router.navigate(['/login'])
+    // }
+    // return result ;
+    return true
   }
 
 }

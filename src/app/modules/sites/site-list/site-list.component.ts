@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 export class SiteListComponent implements OnInit {
 
   public siteList : any = [];
-  public action = "View Details";
+  public add = "Add Site";
 
   constructor(
     private toastr : ToastrService,
