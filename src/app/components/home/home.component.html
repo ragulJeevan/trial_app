@@ -37,7 +37,8 @@
       <b><i>{{title}}</i></b>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <div clas="card" style="background-color: #f1ede7;height: 93vh;overflow: auto;" >
+    <!-- [ngClass]="{'center':!isLoggedIn}" -->
+    <div clas="card" style="background-color: #f1ede7;height:calc(98vh - 48px);;overflow: auto;"  >
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
